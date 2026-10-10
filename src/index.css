@@ -1,0 +1,622 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --bg-page: #050914;
+  --bg-panel: #0a1326;
+  --bg-panel-soft: rgba(11, 17, 31, 0.85);
+  --bg-elevated: #0e1a35;
+  --text: #e8eefb;
+  --text-dim: #a6b6cf;
+  --text-faint: #7488a8;
+  --border: rgba(148, 163, 184, 0.14);
+  --shadow: rgba(2, 6, 23, 0.8);
+  --navy-950: 5 10 22;
+  --navy-900: 8 16 33;
+  --navy-850: 11 21 42;
+  --navy-800: 14 26 51;
+  --navy-750: 17 30 58;
+  --navy-700: 21 36 68;
+  --navy-600: 27 46 85;
+  --navy-500: 35 57 103;
+  --ink: 232 238 251;
+  --ink-dim: 166 182 207;
+  --ink-faint: 116 136 168;
+  --line: 148 163 184;
+
+  /* Layered page glows (consumed by the body background below) */
+  --page-glow-1: rgba(37, 99, 235, 0.16);
+  --page-glow-2: rgba(13, 148, 136, 0.1);
+  --page-glow-3: rgba(99, 102, 241, 0.09);
+  --page-base: linear-gradient(180deg, #060b18 0%, #050914 100%);
+
+  /* Subtle vertical sheen layered on top of panel surfaces */
+  --panel-sheen: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.035),
+    rgba(255, 255, 255, 0) 42%
+  );
+
+  /* Brand accent gradients */
+  --grad-accent: linear-gradient(135deg, #38bdf8 0%, #6366f1 100%);
+  --grad-accent-strong: linear-gradient(135deg, #0ea5e9 0%, #4f46e5 100%);
+
+  /* Theme-aware elevation */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 28px -14px rgba(0, 0, 0, 0.55);
+  --shadow-panel: 0 1px 2px rgba(0, 0, 0, 0.45), 0 24px 48px -20px rgba(0, 0, 0, 0.65);
+  --shadow-glow:
+    0 0 0 1px rgba(56, 189, 248, 0.22), 0 18px 44px -16px rgba(37, 99, 235, 0.4);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  width: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  @apply antialiased;
+  min-height: 100vh;
+  overflow-x: clip;
+  color: var(--text);
+  font-family:
+    'Inter',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  background-color: var(--bg-page);
+  background-image:
+    radial-gradient(1100px 560px at 85% -10%, var(--page-glow-1), transparent 62%),
+    radial-gradient(900px 520px at -12% 112%, var(--page-glow-2), transparent 60%),
+    radial-gradient(720px 440px at 42% 46%, var(--page-glow-3), transparent 65%),
+    var(--page-base);
+  background-attachment: fixed;
+}
+
+html:lang(ar) body {
+  font-family: 'Noto Sans Arabic', Tahoma, system-ui, sans-serif;
+  line-height: 1.65;
+}
+
+@supports (min-height: 100dvh) {
+  body {
+    min-height: 100dvh;
+  }
+}
+
+body.light-mode {
+  color-scheme: light;
+  --bg-page: #eef3fb;
+  --bg-panel: #ffffff;
+  --bg-panel-soft: rgba(255, 255, 255, 0.85);
+  --bg-elevated: #f7faff;
+  --text: #132039;
+  --text-dim: #44597c;
+  --text-faint: #64779a;
+  --border: rgba(39, 56, 84, 0.13);
+  --shadow: rgba(100, 116, 139, 0.22);
+  --navy-950: 238 243 251;
+  --navy-900: 246 249 254;
+  --navy-850: 255 255 255;
+  --navy-800: 247 250 255;
+  --navy-750: 241 245 252;
+  --navy-700: 232 239 249;
+  --navy-600: 217 227 242;
+  --navy-500: 199 214 234;
+  --ink: 19 32 57;
+  --ink-dim: 68 89 124;
+  --ink-faint: 100 119 154;
+  --line: 39 56 84;
+
+  /* Soft daylight page glows */
+  --page-glow-1: rgba(59, 130, 246, 0.14);
+  --page-glow-2: rgba(20, 184, 166, 0.1);
+  --page-glow-3: rgba(129, 140, 248, 0.1);
+  --page-base: linear-gradient(180deg, #f4f8ff 0%, #eaf1fb 55%, #eef3fb 100%);
+
+  /* Airy sheen for white panels */
+  --panel-sheen: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.9),
+    rgba(240, 246, 255, 0.35) 60%,
+    rgba(240, 246, 255, 0)
+  );
+
+  --grad-accent: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
+  --grad-accent-strong: linear-gradient(135deg, #0284c7 0%, #4f46e5 100%);
+
+  --shadow-card:
+    0 1px 2px rgba(15, 34, 66, 0.05), 0 10px 26px -14px rgba(15, 34, 66, 0.18);
+  --shadow-panel:
+    0 1px 3px rgba(15, 34, 66, 0.06), 0 22px 44px -20px rgba(15, 34, 66, 0.22);
+  --shadow-glow:
+    0 0 0 1px rgba(14, 165, 233, 0.3), 0 16px 38px -16px rgba(37, 99, 235, 0.28);
+
+  background-image:
+    radial-gradient(1100px 560px at 85% -10%, var(--page-glow-1), transparent 62%),
+    radial-gradient(900px 520px at -12% 112%, var(--page-glow-2), transparent 60%),
+    radial-gradient(720px 440px at 42% 46%, var(--page-glow-3), transparent 65%),
+    var(--page-base);
+}
+
+body {
+  background-color: var(--bg-page);
+}
+
+body.light-mode .panel,
+body.light-mode .bg-navy-850,
+body.light-mode .bg-navy-900,
+body.light-mode .bg-navy-800,
+body.light-mode .bg-navy-700,
+body.light-mode .bg-navy-950,
+body.light-mode .bg-slate-900 {
+  background-color: var(--bg-panel) !important;
+}
+
+body.light-mode .bg-black\/60 {
+  background-color: rgb(15 23 42 / 0.28) !important;
+}
+
+body.light-mode .bg-black\/70 {
+  background-color: rgb(15 23 42 / 0.38) !important;
+}
+
+body.light-mode .text-ink,
+body.light-mode .text-ink-dim,
+body.light-mode .text-ink-faint {
+  color: var(--text) !important;
+}
+
+body.light-mode .text-ink-dim,
+body.light-mode .text-ink-faint {
+  color: var(--text-dim) !important;
+}
+
+body.light-mode .border-line,
+body.light-mode .border-line {
+  border-color: var(--border) !important;
+}
+
+/* ---------------------------------------------------------------------------
+ * Light-mode accent re-mapping.
+ * The dark theme uses pale "-300/-400" tints that wash out on white panels;
+ * swap them for readable saturated equivalents without touching every
+ * component. MachineVisual's "-200" glows sit on permanently dark gradient
+ * tiles in both themes and are intentionally left untouched.
+ * ------------------------------------------------------------------------ */
+body.light-mode .text-sky-300 {
+  color: #0284c7;
+}
+body.light-mode .text-blue-300 {
+  color: #2563eb;
+}
+body.light-mode .text-indigo-300 {
+  color: #4f46e5;
+}
+body.light-mode .text-violet-300 {
+  color: #7c3aed;
+}
+body.light-mode .text-emerald-300 {
+  color: #059669;
+}
+body.light-mode .text-teal-300 {
+  color: #0d9488;
+}
+body.light-mode .text-cyan-300 {
+  color: #0891b2;
+}
+body.light-mode .text-amber-300 {
+  color: #b45309;
+}
+body.light-mode .text-orange-300 {
+  color: #c2410c;
+}
+body.light-mode .text-red-300 {
+  color: #dc2626;
+}
+body.light-mode .text-rose-300 {
+  color: #e11d48;
+}
+body.light-mode .text-fuchsia-300 {
+  color: #a21caf;
+}
+body.light-mode .text-yellow-300 {
+  color: #a16207;
+}
+
+body.light-mode .text-sky-400 {
+  color: #0284c7;
+}
+body.light-mode .text-blue-400 {
+  color: #2563eb;
+}
+body.light-mode .text-emerald-400 {
+  color: #059669;
+}
+body.light-mode .text-teal-400 {
+  color: #0d9488;
+}
+body.light-mode .text-amber-400 {
+  color: #d97706;
+}
+body.light-mode .text-orange-400 {
+  color: #c2410c;
+}
+body.light-mode .text-red-400 {
+  color: #dc2626;
+}
+body.light-mode .text-violet-400 {
+  color: #7c3aed;
+}
+body.light-mode .text-cyan-400 {
+  color: #0891b2;
+}
+
+/* Hover variants follow the same readable ramp */
+body.light-mode .hover\:text-sky-300:hover {
+  color: #0284c7;
+}
+body.light-mode .hover\:text-emerald-300:hover {
+  color: #059669;
+}
+body.light-mode .hover\:text-amber-300:hover {
+  color: #b45309;
+}
+body.light-mode .hover\:text-red-300:hover {
+  color: #dc2626;
+}
+body.light-mode .group:hover .group-hover\:text-sky-300 {
+  color: #0284c7;
+}
+
+/* ChatGPT Capsule Bar - Light and Dark Theme Harmony */
+.chat-capsule {
+  background-color: #212121;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.35);
+}
+.chat-capsule:focus-within {
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow:
+    0 0 0 2px rgba(56, 189, 248, 0.15),
+    0 4px 14px -2px rgba(0, 0, 0, 0.35);
+}
+.chat-capsule textarea {
+  color: #f1f5f9;
+}
+.chat-capsule textarea::placeholder {
+  color: #94a3b8;
+}
+.chat-capsule .btn-capsule-icon {
+  color: #94a3b8;
+}
+.chat-capsule .btn-capsule-icon:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.chat-capsule .btn-think {
+  color: #cbd5e1;
+}
+.chat-capsule .btn-think:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Light Mode Overrides */
+body.light-mode .chat-capsule {
+  background-color: #f8fafc;
+  border: 1px solid rgba(39, 56, 84, 0.18);
+  color: #0f172a;
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.08);
+}
+body.light-mode .chat-capsule:focus-within {
+  border-color: rgba(2, 132, 199, 0.5);
+  box-shadow:
+    0 0 0 2px rgba(2, 132, 199, 0.15),
+    0 2px 8px -2px rgba(0, 0, 0, 0.08);
+}
+body.light-mode .chat-capsule textarea {
+  color: #0f172a;
+}
+body.light-mode .chat-capsule textarea::placeholder {
+  color: #64748b;
+}
+body.light-mode .chat-capsule .btn-capsule-icon {
+  color: #475569;
+}
+body.light-mode .chat-capsule .btn-capsule-icon:hover {
+  color: #0f172a;
+  background-color: rgba(0, 0, 0, 0.06);
+}
+body.light-mode .chat-capsule .btn-think {
+  color: #334155;
+}
+body.light-mode .chat-capsule .btn-think:hover {
+  color: #0f172a;
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+/* Messages styling in light mode */
+body.light-mode .chat-msg-assistant {
+  background-color: #ffffff !important;
+  border-color: rgba(39, 56, 84, 0.14) !important;
+  color: #0f172a !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06);
+}
+body.light-mode .chat-msg-user {
+  background-color: #eff6ff !important;
+  border-color: #bfdbfe !important;
+  color: #1e3a8a !important;
+}
+
+[dir='rtl'] aside {
+  left: auto;
+  right: 0;
+  border-right-width: 0;
+  border-left-width: 1px;
+}
+
+@media (max-width: 1023px) {
+  [dir='rtl'] .-translate-x-full {
+    transform: translateX(100%);
+  }
+}
+
+[dir='rtl'] .text-left {
+  text-align: right;
+}
+
+[dir='rtl'] .text-right {
+  text-align: left;
+}
+
+[dir='rtl'] aside .absolute.left-0 {
+  left: auto;
+  right: 0;
+}
+
+@media (min-width: 1024px) {
+  [dir='rtl'] .lg\:pl-60 {
+    padding-left: 0;
+    padding-right: 15rem;
+  }
+}
+
+@media (max-width: 639px) {
+  main {
+    padding: 1rem 0.75rem 5rem;
+  }
+
+  footer {
+    padding-inline: 0.75rem;
+    padding-bottom: 5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .top-header-status {
+    max-width: 5.5rem;
+  }
+
+  .top-header-demo,
+  .top-header-profile {
+    display: none;
+  }
+}
+
+body.light-mode .shadow-card,
+body.light-mode .shadow-glow,
+body.light-mode .shadow-panel {
+  box-shadow: var(--shadow-card);
+}
+
+body.light-mode .shadow-glow {
+  box-shadow: var(--shadow-glow);
+}
+
+body.light-mode .shadow-panel {
+  box-shadow: var(--shadow-panel);
+}
+
+/* Theme transition — smooth cross-fade when toggling dark/light */
+@media (prefers-reduced-motion: no-preference) {
+  body,
+  .panel,
+  .btn,
+  .chip,
+  .input {
+    transition:
+      background-color 0.25s ease,
+      background-image 0.25s ease,
+      border-color 0.25s ease,
+      color 0.25s ease,
+      box-shadow 0.25s ease,
+      transform 0.2s ease,
+      filter 0.2s ease;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.16);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.3);
+  background-clip: content-box;
+}
+
+::selection {
+  background: rgba(59, 130, 246, 0.35);
+}
+
+@layer components {
+  .panel {
+    @apply rounded-2xl border border-line;
+    background-color: var(--bg-panel);
+    background-image: var(--panel-sheen);
+    box-shadow: var(--shadow-card);
+  }
+
+  .panel-hover {
+    @apply transition-all duration-200;
+  }
+
+  .panel-hover:hover {
+    transform: translateY(-2px);
+    border-color: rgba(56, 189, 248, 0.28);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-3.5 h-9 text-sm font-semibold transition-all duration-150 cursor-pointer select-none disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn text-white border border-sky-400/40 active:scale-[0.98];
+    background-image: linear-gradient(180deg, #38bdf8 0%, #2563eb 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.22),
+      0 8px 20px -8px rgba(37, 99, 235, 0.7);
+  }
+
+  .btn-primary:hover {
+    filter: brightness(1.08);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.25),
+      0 10px 26px -8px rgba(37, 99, 235, 0.85);
+  }
+
+  .btn-ghost {
+    @apply btn border border-line text-ink-dim active:scale-[0.98];
+    background-image: var(--panel-sheen);
+    background-color: rgb(var(--navy-700) / 0.4);
+  }
+
+  .btn-ghost:hover {
+    @apply text-ink border-sky-400/30;
+    background-color: rgb(var(--navy-700) / 0.75);
+  }
+
+  .btn-danger {
+    @apply btn bg-red-500/10 border border-red-500/30 text-red-300 active:scale-[0.98];
+  }
+
+  .btn-danger:hover {
+    background-color: rgb(239 68 68 / 0.18);
+  }
+
+  .btn-sm {
+    @apply h-8 px-3 text-xs rounded-lg;
+  }
+
+  .input {
+    @apply w-full rounded-xl border border-line px-3.5 h-10 text-sm text-ink placeholder:text-ink-faint outline-none transition-all;
+    background-color: rgb(var(--navy-900) / 0.6);
+  }
+
+  .input:focus {
+    border-color: rgba(56, 189, 248, 0.5);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18);
+  }
+
+  .label {
+    @apply mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-ink-faint;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-lg border border-line px-2.5 py-1 text-[11px] font-medium text-ink-dim;
+    background-image: var(--panel-sheen);
+    background-color: rgb(var(--navy-700) / 0.4);
+  }
+
+  .card-grid {
+    @apply grid gap-4;
+  }
+
+  .machine-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr));
+    gap: 1rem;
+  }
+
+  .thin-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(148, 163, 184, 0.18) transparent;
+  }
+
+  /* Gradient text helper for brand accents */
+  .text-gradient {
+    background-image: var(--grad-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  @media (max-width: 639px) {
+    .panel {
+      border-radius: 0.875rem;
+    }
+
+    .machine-card-grid {
+      gap: 0.75rem;
+    }
+  }
+}
+
+.recharts-default-tooltip {
+  border-radius: 10px !important;
+}
+
+:root {
+  --chart-tooltip-bg: rgba(10, 20, 40, 0.95);
+  --chart-tooltip-text: #e6edf6;
+  --chart-tooltip-muted: #9fb0c8;
+}
+
+body.light-mode {
+  --chart-tooltip-bg: rgba(255, 255, 255, 0.98);
+  --chart-tooltip-text: #122036;
+  --chart-tooltip-muted: #495f83;
+}
+
+.recharts-cartesian-axis-tick text {
+  fill: #6b7d99;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.recharts-cartesian-grid line {
+  stroke: rgba(148, 163, 184, 0.07);
+  stroke-dasharray: 3 5;
+}
+
+body.light-mode .recharts-cartesian-axis-tick text {
+  fill: #64748b;
+}
+
+body.light-mode .recharts-cartesian-grid line {
+  stroke: rgba(100, 116, 139, 0.15);
+}

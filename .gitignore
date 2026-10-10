@@ -1,0 +1,96 @@
+# Dependencies
+node_modules/
+package-lock.json.old
+
+# Build output
+dist/
+dist-ssr/
+.vite/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+*.log
+npm-debug.log*
+npm-error.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor / IDE
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.vscode-test
+.vscode-test.log
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Windows
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Local env files
+.env
+.env.local
+.env.*.local
+
+# ML Data Files (Large files)
+ml/data/**/*.csv
+ml/data/raw/
+ml/data/processed/
+ml/reports/
+ml/models/*.joblib
+ml/quality/models/
+ml/quality/weights/
+ml/quality/data/
+ml/quality/results/
+.venv-quality/
+ml/assistant/data/
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb
+ml/notebooks/.ipynb_checkpoints
+!ml/quality/notebooks/food_box_augmented_training.ipynb
+
+# IDE temp files
+.sublime-project
+.sublime-workspace
+.project
+.pydevproject
+.settings/
+
+# Production
+.next
+out
+
+# Local n8n data (contains encryption key and database)
+n8n-data/
